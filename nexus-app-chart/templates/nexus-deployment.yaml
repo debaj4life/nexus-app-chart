@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.nexusApplicationName }}
+  namespace: {{ .Values.namespace }} 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.nexusApplicationName }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.nexusApplicationName }}
+    spec:
+      containers:
+        - name: {{ .Values.nexusApplicationName }}
+          image: "{{ .Values.nexusimage.name }}:{{ .Values.nexusimage.tag }}"
+          resources: 
+            requests: 
+              memory: "2Gi"
+              cpu: "500m" 
+            limits: 
+              memory: "4Gi" 
+              cpu: "2000m"
+          ports:
+            - containerPort: 8081
+      imagePullSecrets:
+        - name: nexus-app-secret

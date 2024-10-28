@@ -1,0 +1,15 @@
+nexusApplicationName : nexus-app
+
+namespace: tooling
+
+nexusimage: 
+  name: 339712841242.dkr.ecr.eu-west-2.amazonaws.com/nexus-repo/nexus-app:latest
+  tag: "latest"
+
+
+nexusservice: nexus-app-service
+
+nexusSecret: nexus-app-secret
+
+serviceingress:  nexus-ingress-service
+nexusappbaseURL : nexus.techrite.org

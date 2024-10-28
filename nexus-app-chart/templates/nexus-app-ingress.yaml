@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Values.serviceingress }}
+  namespace: {{ .Values.namespace }}
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
+  labels:
+    name: {{ .Values.serviceingress }}
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: {{ .Values.nexusappbaseURL }}
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: {{ .Values.nexusservice }}
+            port:
+              number: 8081
